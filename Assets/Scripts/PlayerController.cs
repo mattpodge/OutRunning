@@ -6,17 +6,13 @@ using TMPro;
 public class PlayerController : MonoBehaviour
 {
 
-    [SerializeField] private float velocity = 10.0f;
-
-    private float horzInput;
-    private float vertInput;
     private Rigidbody playerRb;
+    [SerializeField] private GameObject centreOfMass;
 
     [SerializeField] private TextMeshProUGUI speedometerText;
-    private float currentSpeed;
     [SerializeField] private string speedUnit = "kph";
+    private float currentSpeed;
     private float maxKph = 295.0f;
-
     private float kphConv = 3.6f;
     private float mphConv = 2.237f;
 
@@ -37,13 +33,12 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerRb = gameObject.GetComponent<Rigidbody>();
+        playerRb.centerOfMass = centreOfMass.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        horzInput = Input.GetAxis("Horizontal");
-        vertInput = Input.GetAxis("Vertical");
         UpdateSpeed();
     }
 
